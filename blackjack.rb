@@ -1,14 +1,3 @@
-class String
-  def black; "\033[30m#{self}\033[0m" end
-  def red; "\033[31m#{self}\033[0m" end
-  def green; "\033[32m#{self}\033[0m" end
-  def brown; "\033[33m#{self}\033[0m" end
-  def blue; "\033[34m#{self}\033[0m" end
-  def magenta; "\033[35m#{self}\033[0m" end
-  def cyan; "\033[36m#{self}\033[0m" end
-  def gray; "\033[37m#{self}\033[0m" end
-end
-
 class Human
   attr_accessor :name, :bankroll, :hand
 
@@ -73,7 +62,7 @@ class Game
   end
 
   def new_game
-    puts "\nWelcome, let's play blackjack #{@@Encodes} ... loser. ".red
+    puts "\nWelcome, let's play blackjack #{@@Encodes} ... ".red
     print "What's your name? "
     @player_name = gets.chomp
     puts "\nNiCE tO meEt YoU #{@player_name}. I'll deal you in...".red
@@ -90,20 +79,20 @@ class Game
     puts "\n#{@player_name}'s' Hand:".cyan
     if @player.hand[1].suit == "spades"
       @player.hand[1].suit = "\u2664".encode("utf-8")
-    elsif @player.hand[1].suit == "hearts"
-      @player.hand[1].suit = "\u2661".encode("utf-8")
-    elsif @player.hand[1].suit == "clubs"
-      @player.hand[1].suit = "\u2662".encode("utf-8")
-    elsif @player.hand[1].suit == "diamonds"
-      @player.hand[1].suit = "\u2667".encode("utf-8")
-    end
-    if @player.hand[0].suit == "spades"
-      @player.hand[0].suit = "\u2664".encode("utf-8")
-    elsif @player.hand[0].suit == "hearts"
-      @player.hand[0].suit = "\u2661".encode("utf-8")
-    elsif @player.hand[0].suit == "clubs"
-      @player.hand[0].suit = "\u2662".encode("utf-8")
-    elsif @player.hand[0].suit == "diamonds"
+      elsif @player.hand[1].suit == "hearts"
+        @player.hand[1].suit = "\u2661".encode("utf-8")
+      elsif @player.hand[1].suit == "clubs"
+        @player.hand[1].suit = "\u2662".encode("utf-8")
+      elsif @player.hand[1].suit == "diamonds"
+        @player.hand[1].suit = "\u2667".encode("utf-8")
+      end
+      if @player.hand[0].suit == "spades"
+        @player.hand[0].suit = "\u2664".encode("utf-8")
+      elsif @player.hand[0].suit == "hearts"
+        @player.hand[0].suit = "\u2661".encode("utf-8")
+      elsif @player.hand[0].suit == "clubs"
+        @player.hand[0].suit = "\u2662".encode("utf-8")
+      elsif @player.hand[0].suit == "diamonds"
       @player.hand[0].suit = "\u2667".encode("utf-8")
     end
     puts "Card One : ".magenta + @player.hand[0].value.to_s.green + " of ".blue + @player.hand[0].suit.cyan
@@ -204,6 +193,17 @@ class Game
     ans = gets.chomp
     p ans == "y" ? deal_player : exit
   end
+end
+
+class String
+  def black; "\033[30m#{self}\033[0m" end
+  def red; "\033[31m#{self}\033[0m" end
+  def green; "\033[32m#{self}\033[0m" end
+  def brown; "\033[33m#{self}\033[0m" end
+  def blue; "\033[34m#{self}\033[0m" end
+  def magenta; "\033[35m#{self}\033[0m" end
+  def cyan; "\033[36m#{self}\033[0m" end
+  def gray; "\033[37m#{self}\033[0m" end
 end
 
 Game.new.new_game
