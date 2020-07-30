@@ -85,7 +85,7 @@ class Game
     @ary = @deck.fill.flatten.shuffle!
     @card1 = @ary.pop()
     @card2 = @ary.pop()
-    @player = Human.new(@player_name, 100, [@card1, @card2])
+    if !@player then @player = Human.new(@player_name, 100, [@card1, @card2]) end
     puts "Your current bankroll is #{@player.bankroll}"
     puts "\n#{@player_name}'s' Hand:".cyan
     if @player.hand[1].suit == "spades"
@@ -168,7 +168,7 @@ class Game
       puts "House hits".gray
       tot += @ary.pop().value.to_i
       puts "House gets #{tot}".gray
-      puts tot > 21 ? "DEALER BUST".red : next
+      puts "DEALER BUST".red  if tot > 21
     end
     return tot
   end
@@ -198,10 +198,11 @@ class Game
   def fin_game(score)
     @hit_request = "n"
     @player.bankroll -= 10
-    @computer.bankroll += 10
     puts "#{score}! \nYOU LOSE ".red
     puts "Remaining balance is #{@player.bankroll}"
-    exit
+    puts "\nNew Game? (y/n)".blue
+    ans = gets.chomp
+    p ans == "y" ? deal_player : exit
   end
 end
 
