@@ -142,6 +142,24 @@ class Game
     @card4 = @ary.pop()
     @computer = House.new(@computer_name, 100, [@card3, @card4])
     puts "\nDealer Hand:".gray
+    if @computer.hand[1].suit == "spades"
+        @computer.hand[1].suit = "\u2664".encode("utf-8")
+      elsif @computer.hand[1].suit == "hearts"
+        @computer.hand[1].suit = "\u2661".encode("utf-8")
+      elsif @computer.hand[1].suit == "clubs"
+        @computer.hand[1].suit = "\u2662".encode("utf-8")
+      elsif @computer.hand[1].suit == "diamonds"
+        @computer.hand[1].suit = "\u2667".encode("utf-8")
+      end
+      if @computer.hand[0].suit == "spades"
+        @computer.hand[0].suit = "\u2664".encode("utf-8")
+      elsif @computer.hand[0].suit == "hearts"
+        @computer.hand[0].suit = "\u2661".encode("utf-8")
+      elsif @computer.hand[0].suit == "clubs"
+        @computer.hand[0].suit = "\u2662".encode("utf-8")
+      elsif @computer.hand[0].suit == "diamonds"
+        @computer.hand[0].suit = "\u2667".encode("utf-8")
+      end
     puts "Card One : ".gray + @computer.hand[0].value.to_s.gray + " of ".gray + @computer.hand[0].suit.gray
     puts "Card Two : ".gray + @computer.hand[1].value.to_s.gray + " of ".gray + @computer.hand[1].suit.gray
     tot = @computer.hand[0].value.to_i + @computer.hand[1].value.to_i
@@ -174,7 +192,7 @@ class Game
     end
     puts "\nNew Game? (y/n)".blue
     ans = gets.chomp
-    p ans ? deal_player : exit
+    p ans == "y" ? deal_player : exit
   end
 
   def fin_game(score)
